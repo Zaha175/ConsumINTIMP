@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grafic Consum Alcool</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-container {
+            display: table;
+            width: 100%;
+            border-spacing: 0 15px;
+        }
+        .form-row {
+            display: table-row;
+        }
+        .form-cell {
+            display: table-cell;
+            text-align: right;
+            padding-right: 10px;
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+        input {
+            width: 60px;
+            padding: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .chart-container {
+            margin-top: 20px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Evoluția Consumului de Alcool</h2>
+    
+    <div class="form-container">
+        <div class="form-row">
+            <div class="form-cell">Perioada 1:</div>
+            <div class="form-cell"><input type="text" id="ani1" value="20-36"></div>
+            <div class="form-cell">Perioada 2:</div>
+            <div class="form-cell"><input type="text" id="ani2" value="36-40"></div>
+            <div class="form-cell"></div>
+            <div class="form-cell"></div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-cell">Beri RO:</div>
+            <div class="form-cell"><input type="number" id="roBeri" value="0" min="0"></div>
+            <div class="form-cell">Beri DE:</div>
+            <div class="form-cell"><input type="number" id="deBeri" value="0" min="0"></div>
+            <div class="form-cell">Beri MAX:</div>
+            <div class="form-cell"><input type="number" id="maxBeri" value="0" min="0"></div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-cell">Duble RO:</div>
+            <div class="form-cell"><input type="number" id="roDuble" value="0" min="0"></div>
+            <div class="form-cell">Duble DE:</div>
+            <div class="form-cell"><input type="number" id="deDuble" value="0" min="0"></div>
+            <div class="form-cell">Duble MAX:</div>
+            <div class="form-cell"><input type="number" id="maxDuble" value="0" min="0"></div>
+        </div>
+    </div>
+
+    <button onclick="generateChart()">Generează Grafic</button>
+
+    <div class="chart-container">
+        <canvas id="alcoholChart"></canvas>
+    </div>
+
+    <script>
+    let myChart = null;
+
+    function generateChart() {
+        if (myChart !== null) {
+            myChart.destroy();
+        }
+
+        const ctx = document.getElementById('alcoholChart').getContext('2d');
+        
+        const getBeri = (id) => {
+            const value = parseInt(document.getElementById(id).value) || 0;
+            return Math.max(0, value);
+        };
+        
+        const getDuble = (id) => {
+            const value = parseInt(document.getElementById(id).value) || 0;
+            return Math.max(0, value);
+        };
+
+        const ani1 = document.getElementById('ani1').value || '20-36';
+        const ani2 = document.getElementById('ani2').value || '36-40';
+        
+        const roBeri = getBeri('roBeri');
+        const deBeri = getBeri('deBeri');
+        const maxBeri = getBeri('maxBeri');
+        
+        const roDuble = getDuble('roDuble');
+        const deDuble = getDuble('deDuble');
+        const maxDuble = getDuble('maxDuble');
+
+        const data = {
+            labels: [
+                `${ani1} (Mediu/lună)`, 
+                `${ani2} (Mediu/săptămână)`, 
+                'Maxim (4x pe an)'
+            ],
+            datasets: [
+                {
+                    label: 'Beri (0.5L)',
+                    data: [roBeri, deBeri, maxBeri],
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2
+                },
+                {
+                    label: 'Duble (Șnaps)',
+                    data: [roDuble, deDuble, maxDuble],
+                    backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2
+                }
+            ]
+        };
+
+        try {
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Număr de băuturi',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Evoluția Consumului de Alcool',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Eroare la generarea graficului:', error);
+            alert('A apărut o eroare la generarea graficului. Vă rugăm să încercați din nou.');
+        }
+    }
+
+    // Generează graficul inițial când se încarcă pagina
+    document.addEventListener('DOMContentLoaded', function() {
+        generateChart();
+    });
+    </script>
+</body>
+</html>

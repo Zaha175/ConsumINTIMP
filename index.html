@@ -11,41 +11,92 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            background: url('https://cdn.gamma.app/fhpleqvbjim2f32/generated-images/RrPt9GWIWLNzlhZAOEO28.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #003366; /* Dunkelblau für alle Texte */
         }
         .form-container {
-            display: table;
-            width: 100%;
-            border-spacing: 0 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .form-section {
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.9);
         }
         .form-row {
-            display: table-row;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
         }
         .form-cell {
-            display: table-cell;
             text-align: right;
-            padding-right: 10px;
             white-space: nowrap;
+            flex: 1;
+            padding-right: 10px;
             vertical-align: middle;
         }
-        input {
+        .form-cell input {
             width: 60px;
             padding: 5px;
+            color: #003366; /* Dunkelblau für Eingabefelder */
+        }
+        .form-section h3 {
+            font-size: 1.6em;
+            color: #003366; /* Dunkelblau für Überschriften */
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .form-section.period1 {
+            background-color: rgba(173, 216, 230, 0.5);
+        }
+        .form-section.period1 .form-cell label,
+        .form-section.period2 .form-cell label {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #003366; /* Dunkelblau für Labels */
+        }
+        .form-section.period2 {
+            background-color: rgba(173, 216, 230, 0.7);
+        }
+        .form-section.max {
+             background-color: rgba(220, 220, 220, 0.5);
         }
         button {
-            background-color: #4CAF50;
-            color: white;
+            background: #4CAF50;
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: bold;
             padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            margin: 20px 0;
+            transition: background 0.3s ease;
         }
         button:hover {
-            background-color: #45a049;
+            background: #388E3C;
         }
         .chart-container {
+            background: #FFF9C4; /* Hellgelber Hintergrund für den Diagramm-Container */
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             margin-top: 20px;
             height: 400px;
+        }
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .form-cell {
+                text-align: left;
+                padding-right: 0;
+                margin-bottom: 5px;
+            }
         }
     </style>
 </head>
@@ -53,31 +104,51 @@
     <h2>Evoluția Consumului de Alcool</h2>
     
     <div class="form-container">
-        <div class="form-row">
-            <div class="form-cell">Perioada 1:</div>
-            <div class="form-cell"><input type="text" id="ani1" value="20-36"></div>
-            <div class="form-cell">Perioada 2:</div>
-            <div class="form-cell"><input type="text" id="ani2" value="36-40"></div>
-            <div class="form-cell"></div>
-            <div class="form-cell"></div>
+         <div class="form-section period1">
+             <h3>De exemplu: Între 20 și 30 de ani</h3>
+              <p>Consumul mediu de alcool în această perioadă.</p>
+             <div class="form-row">
+                <div class="form-cell"><label>Perioada 1:</label></div>
+                <div class="form-cell"><input type="text" id="ani1" value="20-36" readonly title="Zeitraum von 20 bis 30 Jahren"></div>
+                <div class="form-cell"><label>O dată, de două ori pe lună!</label></div>
+            </div>
+            <div class="form-row">
+                <div class="form-cell"><label>Beri :</label></div>
+                <div class="form-cell"><input type="number" id="roBeri" value="0" min="0" title="Anzahl der Bier (0.5L) pro Monat"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-cell"><label>Duble :</label></div>
+                <div class="form-cell"><input type="number" id="roDuble" value="0" min="0" title="Anzahl der Schnäpse pro Monat"></div>
+            </div>
         </div>
-
-        <div class="form-row">
-            <div class="form-cell">Beri RO:</div>
-            <div class="form-cell"><input type="number" id="roBeri" value="0" min="0"></div>
-            <div class="form-cell">Beri DE:</div>
-            <div class="form-cell"><input type="number" id="deBeri" value="0" min="0"></div>
-            <div class="form-cell">Beri MAX:</div>
-            <div class="form-cell"><input type="number" id="maxBeri" value="0" min="0"></div>
+        <div class="form-section period2">
+            <h3>De exemplu: De la 30 la 35 de ani</h3>
+             <p>Consumul mediu de alcool în această perioadă.</p>
+            <div class="form-row">
+                <div class="form-cell"><label>Perioada 2:</label></div>
+                <div class="form-cell"><input type="text" id="ani2" value="36-40" readonly title="Zeitraum von 30 bis 35 Jahren"></div>
+                 <div class="form-cell"><label>de două sau trei ori pe lună!</label></div>
+            </div>
+            <div class="form-row">
+                <div class="form-cell"><label>Beri: Media pe săptămină!:</label></div>
+                <div class="form-cell"><input type="number" id="deBeri" value="0" min="0" title="Anzahl der Bier (0.5L) pro Woche"></div>
+            </div>
+             <div class="form-row">
+               <div class="form-cell"><label>Duble: Media pe săptămină!:</label></div>
+               <div class="form-cell"><input type="number" id="deDuble" value="0" min="0" title="Anzahl der Schnäpse pro Woche"></div>
+            </div>
         </div>
-
-        <div class="form-row">
-            <div class="form-cell">Duble RO:</div>
-            <div class="form-cell"><input type="number" id="roDuble" value="0" min="0"></div>
-            <div class="form-cell">Duble DE:</div>
-            <div class="form-cell"><input type="number" id="deDuble" value="0" min="0"></div>
-            <div class="form-cell">Duble MAX:</div>
-            <div class="form-cell"><input type="number" id="maxDuble" value="0" min="0"></div>
+        <div class="form-section max">
+             <h3>Maxim</h3>
+               <p>Cantitatea maximă de alcool la ocazii rare (aproximativ de 4, 5, 6 ori pe an).</p>
+            <div class="form-row">
+                <div class="form-cell"><label>Beri MAX:</label></div>
+                <div class="form-cell"><input type="number" id="maxBeri" value="0" min="0" title="Maximale Anzahl der Bier (0.5L) bei seltenen Gelegenheiten"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-cell"><label>Duble MAX:</label></div>
+                <div class="form-cell"><input type="number" id="maxDuble" value="0" min="0" title="Maximale Anzahl der Schnäpse bei seltenen Gelegenheiten"></div>
+            </div>
         </div>
     </div>
 

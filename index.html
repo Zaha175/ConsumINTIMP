@@ -13,12 +13,12 @@
             padding: 20px;
             background: url('https://cdn.gamma.app/fhpleqvbjim2f32/generated-images/RrPt9GWIWLNzlhZAOEO28.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: #003366; /* Dunkelblau für alle Texte */
+            color: #003366;
         }
         .form-container {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 30px; /* Vergrößerter Abstand zwischen den Formularbereichen */
         }
         .form-section {
             padding: 15px;
@@ -42,11 +42,11 @@
         .form-cell input {
             width: 60px;
             padding: 5px;
-            color: #003366; /* Dunkelblau für Eingabefelder */
+            color: #003366;
         }
         .form-section h3 {
             font-size: 1.6em;
-            color: #003366; /* Dunkelblau für Überschriften */
+            color: #003366;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
             text-align: center;
@@ -58,7 +58,7 @@
         .form-section.period2 .form-cell label {
             font-size: 1.1em;
             font-weight: bold;
-            color: #003366; /* Dunkelblau für Labels */
+            color: #003366;
         }
         .form-section.period2 {
             background-color: rgba(173, 216, 230, 0.7);
@@ -74,18 +74,30 @@
             padding: 10px 20px;
             border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.2s ease; /* Zoom-Effekt hinzugefügt */
         }
         button:hover {
             background: #388E3C;
+            transform: scale(1.05); /* Zoom-Effekt bei Hover */
         }
         .chart-container {
-            background: #FFF9C4; /* Hellgelber Hintergrund für den Diagramm-Container */
+            background: #FFF9C4;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             margin-top: 20px;
             height: 400px;
+        }
+         .chart-container canvas {
+            width: 100%;
+            height: 100%;
+        }
+        .chart-container h2 {
+            font-size: 1.8em; /* Größerer Titel für das Diagramm */
+            font-weight: bold;
+            text-align: center;
+            color: #003366;
+            margin-bottom: 15px;
         }
         @media (max-width: 600px) {
             .form-row {
@@ -155,6 +167,7 @@
     <button onclick="generateChart()">Generează Grafic</button>
 
     <div class="chart-container">
+    <h2>Evoluția Consumului de Alcool</h2>
         <canvas id="alcoholChart"></canvas>
     </div>
 
@@ -241,7 +254,7 @@
                             }
                         },
                         title: {
-                            display: true,
+                            display: false,
                             text: 'Evoluția Consumului de Alcool',
                             font: {
                                 size: 16,

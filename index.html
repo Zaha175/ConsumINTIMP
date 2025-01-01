@@ -11,26 +11,33 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background: url('https://cdn.gamma.app/fhpleqvbjim2f32/generated-images/RrPt9GWIWLNzlhZAOEO28.jpg') no-repeat center center fixed;
+            background: url('https://cdn.gamma.app/fhpleqvbjim2f32/generated-images/3djqEhQzqiab1cOhnXSJb.jpg') no-repeat center center fixed;
             background-size: cover;
-            color: #003366;
+            color: #003366; /* Dunkelblau für den Haupttext */
+        }
+        h2 {
+            color: #FFD700; /* Dunkelgelb für die Überschrift */
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
         .form-container {
             display: flex;
             flex-direction: column;
-            gap: 30px; /* Vergrößerter Abstand zwischen den Formularbereichen */
+            gap: 30px;
         }
         .form-section {
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
+            color: #003366; /* Dunkelblau für den Text in den Formularabschnitten */
         }
         .form-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .form-cell {
             text-align: right;
@@ -38,66 +45,64 @@
             flex: 1;
             padding-right: 10px;
             vertical-align: middle;
+            color: #003366; /* Dunkelblau für Labels und Texte */
         }
         .form-cell input {
-            width: 60px;
-            padding: 5px;
+            width: 100px; /* Größere Breite der Eingabefelder */
+            padding: 10px; /* Größere Höhe der Eingabefelder */
             color: #003366;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em; /* Größere Schrift in den Eingabefeldern */
+        }
+        .form-cell input:hover {
+            border-color: #FFD700; /* Hover-Effekt für Eingabefelder */
         }
         .form-section h3 {
-            font-size: 1.6em;
-            color: #003366;
+            font-size: 1.8em;
+            color: #003366; /* Dunkelblau für Unterüberschriften */
             font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
             text-align: center;
+            margin-bottom: 15px;
         }
         .form-section.period1 {
-            background-color: rgba(173, 216, 230, 0.5);
-        }
-        .form-section.period1 .form-cell label,
-        .form-section.period2 .form-cell label {
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #003366;
+            background-color: rgba(173, 216, 230, 0.6);
         }
         .form-section.period2 {
-            background-color: rgba(173, 216, 230, 0.7);
+            background-color: rgba(173, 216, 230, 0.8);
         }
         .form-section.max {
-             background-color: rgba(220, 220, 220, 0.5);
+             background-color: rgba(220, 220, 220, 0.6);
         }
         button {
             background: #4CAF50;
             color: #fff;
-            font-size: 1.1em;
+            font-size: 1.2em;
             font-weight: bold;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease; /* Zoom-Effekt hinzugefügt */
+            transition: background 0.3s ease, transform 0.2s ease;
         }
         button:hover {
             background: #388E3C;
-            transform: scale(1.05); /* Zoom-Effekt bei Hover */
+            transform: scale(1.05);
         }
         .chart-container {
-            background: #FFF9C4;
-            padding: 15px;
+            background: rgba(255, 249, 196, 0.9);
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             margin-top: 20px;
             height: 400px;
-        }
-         .chart-container canvas {
-            width: 100%;
-            height: 100%;
+            color: #003366; /* Dunkelblau für den Text im Diagrammcontainer */
         }
         .chart-container h2 {
-            font-size: 1.8em; /* Größerer Titel für das Diagramm */
+            font-size: 2em;
             font-weight: bold;
             text-align: center;
-            color: #003366;
-            margin-bottom: 15px;
+            color: #FFD700; /* Dunkelgelb für die Diagrammüberschrift */
+            margin-bottom: 20px;
         }
         @media (max-width: 600px) {
             .form-row {
@@ -107,7 +112,10 @@
             .form-cell {
                 text-align: left;
                 padding-right: 0;
-                margin-bottom: 5px;
+                margin-bottom: 10px;
+            }
+            .form-cell input {
+                width: 100%; /* Vollständige Breite auf mobilen Geräten */
             }
         }
     </style>
@@ -126,11 +134,11 @@
             </div>
             <div class="form-row">
                 <div class="form-cell"><label>Beri :</label></div>
-                <div class="form-cell"><input type="number" id="roBeri" value="0" min="0" title="Anzahl der Bier (0.5L) pro Monat"></div>
+                <div class="form-cell"><input type="number" id="roBeri" value="0" min="0" title="Anzahl der Bier (0.5L) pro Monat" placeholder="0"></div>
             </div>
             <div class="form-row">
                 <div class="form-cell"><label>Duble :</label></div>
-                <div class="form-cell"><input type="number" id="roDuble" value="0" min="0" title="Anzahl der Schnäpse pro Monat"></div>
+                <div class="form-cell"><input type="number" id="roDuble" value="0" min="0" title="Anzahl der Schnäpse pro Monat" placeholder="0"></div>
             </div>
         </div>
         <div class="form-section period2">
@@ -143,11 +151,11 @@
             </div>
             <div class="form-row">
                 <div class="form-cell"><label>Beri: Media pe săptămină!:</label></div>
-                <div class="form-cell"><input type="number" id="deBeri" value="0" min="0" title="Anzahl der Bier (0.5L) pro Woche"></div>
+                <div class="form-cell"><input type="number" id="deBeri" value="0" min="0" title="Anzahl der Bier (0.5L) pro Woche" placeholder="0"></div>
             </div>
              <div class="form-row">
                <div class="form-cell"><label>Duble: Media pe săptămină!:</label></div>
-               <div class="form-cell"><input type="number" id="deDuble" value="0" min="0" title="Anzahl der Schnäpse pro Woche"></div>
+               <div class="form-cell"><input type="number" id="deDuble" value="0" min="0" title="Anzahl der Schnäpse pro Woche" placeholder="0"></div>
             </div>
         </div>
         <div class="form-section max">
@@ -155,11 +163,11 @@
                <p>Cantitatea maximă de alcool la ocazii rare (aproximativ de 4, 5, 6 ori pe an).</p>
             <div class="form-row">
                 <div class="form-cell"><label>Beri MAX:</label></div>
-                <div class="form-cell"><input type="number" id="maxBeri" value="0" min="0" title="Maximale Anzahl der Bier (0.5L) bei seltenen Gelegenheiten"></div>
+                <div class="form-cell"><input type="number" id="maxBeri" value="0" min="0" title="Maximale Anzahl der Bier (0.5L) bei seltenen Gelegenheiten" placeholder="0"></div>
             </div>
             <div class="form-row">
                 <div class="form-cell"><label>Duble MAX:</label></div>
-                <div class="form-cell"><input type="number" id="maxDuble" value="0" min="0" title="Maximale Anzahl der Schnäpse bei seltenen Gelegenheiten"></div>
+                <div class="form-cell"><input type="number" id="maxDuble" value="0" min="0" title="Maximale Anzahl der Schnäpse bei seltenen Gelegenheiten" placeholder="0"></div>
             </div>
         </div>
     </div>
@@ -273,6 +281,11 @@
     // Generează graficul inițial când se încarcă pagina
     document.addEventListener('DOMContentLoaded', function() {
         generateChart();
+    });
+
+    // Dynamische Aktualisierung des Diagramms bei Eingabeänderungen
+    document.querySelectorAll('.form-cell input').forEach(input => {
+        input.addEventListener('input', generateChart);
     });
     </script>
 </body>
